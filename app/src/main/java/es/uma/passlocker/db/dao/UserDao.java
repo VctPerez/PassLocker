@@ -3,14 +3,14 @@ package es.uma.passlocker.db.dao;
 import es.uma.passlocker.db.DatabaseHelper;
 import es.uma.passlocker.db.entities.UserEntity;
 
-import android.content.Context;
 import android.database.Cursor;
 
 public class UserDao {
     private DatabaseHelper databaseHelper;
+    private static UserDao userDao;
 
-    public UserDao(Context context) {
-        this.databaseHelper = new DatabaseHelper(context);
+    private UserDao() {
+        this.databaseHelper = DatabaseHelper.getInstance();
     }
 
     public void insertUser(String username) {
@@ -35,5 +35,24 @@ public class UserDao {
         } else {
             return null;
         }
+    }
+
+    public UserEntity getUser(int id) {
+        Cursor cursor = databaseHelper.getReadableDatabase().rawQuery("SELECT id, username FROM users WHERE id = ?", new String[]{String.valueOf(id)});
+        if (cursor != null && cursor.moveToFirst()) {
+            int userId = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            String username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
+            cursor.close();
+            return new UserEntity(userId, username);
+        } else {
+            return null;
+        }
+    }
+
+    public static UserDao getInstance() {
+        if (userDao == null) {
+            userDao = new UserDao();
+        }
+        return userDao;
     }
 }

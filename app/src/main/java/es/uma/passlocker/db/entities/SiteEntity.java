@@ -13,7 +13,7 @@ public class SiteEntity {
         return id;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         if (id < 0) {
             throw new IllegalArgumentException("Id must be greater than 0");
         }
@@ -24,7 +24,7 @@ public class SiteEntity {
         return name;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 }

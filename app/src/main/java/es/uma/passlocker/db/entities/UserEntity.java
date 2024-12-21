@@ -13,7 +13,7 @@ public class UserEntity {
         return username;
     }
 
-    public void setUsername(String username) {
+    private void setUsername(String username) {
         this.username = username;
     }
 
@@ -21,7 +21,7 @@ public class UserEntity {
         return id;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         if(id < 0) {
             throw new IllegalArgumentException("Id must be greater than 0");
         }
