@@ -1,5 +1,7 @@
 package es.uma.passlocker.db.entities;
 
+import androidx.annotation.NonNull;
+
 public class SiteEntity {
     private int id;
     private String name;
@@ -26,5 +28,10 @@ public class SiteEntity {
 
     private void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

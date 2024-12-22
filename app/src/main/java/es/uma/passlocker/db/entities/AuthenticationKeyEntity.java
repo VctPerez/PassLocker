@@ -1,5 +1,7 @@
 package es.uma.passlocker.db.entities;
 
+import androidx.annotation.NonNull;
+
 public class AuthenticationKeyEntity {
     private int id;
     private String authKey;
@@ -46,5 +48,11 @@ public class AuthenticationKeyEntity {
 
     private void setUser(UserEntity user) {
         this.user = user;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return authKey;
     }
 }

@@ -1,0 +1,9 @@
+<resources>
+    <string name="auth_keys">Claves de Autenticación</string>
+    <string name="passwords">Contraseñas</string>
+    <string name="language">Idioma</string>
+    <string-array name="translation_options">
+        <item>Spanish</item>
+        <item>English</item>
+    </string-array>
+</resources>

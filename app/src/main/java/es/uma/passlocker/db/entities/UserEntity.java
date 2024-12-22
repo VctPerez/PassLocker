@@ -1,5 +1,7 @@
 package es.uma.passlocker.db.entities;
 
+import androidx.annotation.NonNull;
+
 public class UserEntity {
     private int id;
     private String username;
@@ -26,5 +28,11 @@ public class UserEntity {
             throw new IllegalArgumentException("Id must be greater than 0");
         }
         this.id = id;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return username;
     }
 }
