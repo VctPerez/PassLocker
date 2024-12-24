@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import es.uma.passlocker.R;
-import es.uma.passlocker.db.entities.AuthenticationKeyEntity;
+import es.uma.passlocker.db.entities.PasswordInfoEntity;
 
 public class AuthKeyAdapter extends RecyclerView.Adapter<AuthKeyAdapter.AuthKeyViewHolder>{
 
-    private List<AuthenticationKeyEntity> authKeyList;
+    private List<PasswordInfoEntity> authKeyList;
 
-    public AuthKeyAdapter(List<AuthenticationKeyEntity> authKeyList) {
+    public AuthKeyAdapter(List<PasswordInfoEntity> authKeyList) {
         this.authKeyList = authKeyList;
     }
 
@@ -43,7 +43,7 @@ public class AuthKeyAdapter extends RecyclerView.Adapter<AuthKeyAdapter.AuthKeyV
 
     @Override
     public void onBindViewHolder(@NonNull AuthKeyAdapter.AuthKeyViewHolder holder, int position) {
-        AuthenticationKeyEntity currentItem = authKeyList.get(position);
+        PasswordInfoEntity currentItem = authKeyList.get(position);
         holder.tvAuthKey.setText(currentItem.getAuthKey());
         holder.tvUsername.setText(currentItem.getUser().getUsername());
         holder.tvSite.setText(currentItem.getSite().getName());

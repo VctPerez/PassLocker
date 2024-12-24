@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.uma.passlocker.db.entities.AuthenticationKeyEntity;
-import es.uma.passlocker.db.entities.SiteEntity;
+import es.uma.passlocker.db.entities.PasswordInfoEntity;
 import es.uma.passlocker.db.entities.UserEntity;
 import es.uma.passlocker.ui.adapter.AuthKeyAdapter;
 
@@ -17,7 +16,7 @@ public class AuthKeysActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private AuthKeyAdapter adapter;
-    private List<AuthenticationKeyEntity> authKeyList;
+    private List<PasswordInfoEntity> authKeyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +33,8 @@ public class AuthKeysActivity extends AppCompatActivity {
 
     private void initList(){
         authKeyList = new ArrayList<>();
-        authKeyList.add(new AuthenticationKeyEntity(1, "authKey1",
-                new UserEntity(1,"username"),
-                new SiteEntity(1, "site1")));
+        authKeyList.add(new PasswordInfoEntity(1, new UserEntity(1,"username"), "Steam", "www.google.es", null));
 
-        authKeyList.add(new AuthenticationKeyEntity(1, "authKey2",
-                new UserEntity(1,"username"),
-                new SiteEntity(1, "site2")));
+        authKeyList.add(new PasswordInfoEntity(2, new UserEntity(1,"username"), "Epic Games", "www.google.es", "Fornai"));
     }
 }
