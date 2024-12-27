@@ -14,19 +14,19 @@ public class UserDao {
     }
 
     public void insertUser(String username, String password) {
-        databaseHelper.getWritableDatabase().execSQL("INSERT INTO users (username, password) VALUES ('" + username + "', '" + password + "')");
+        databaseHelper.getWritableDatabase().execSQL("INSERT INTO user (username, password) VALUES ('" + username + "', '" + password + "')");
     }
 
     public void deleteUser(String username) {
-        databaseHelper.getWritableDatabase().execSQL("DELETE FROM users WHERE username = '" + username + "'");
+        databaseHelper.getWritableDatabase().execSQL("DELETE FROM user WHERE username = '" + username + "'");
     }
 
     public void updateUser(String oldUsername, String newUsername) {
-        databaseHelper.getWritableDatabase().execSQL("UPDATE users SET username = '" + newUsername + "' WHERE username = '" + oldUsername + "'");
+        databaseHelper.getWritableDatabase().execSQL("UPDATE user SET username = '" + newUsername + "' WHERE username = '" + oldUsername + "'");
     }
 
     public UserEntity getUser(String username) {
-        Cursor cursor = databaseHelper.getReadableDatabase().rawQuery("SELECT id, username FROM users WHERE username = ?", new String[]{username});
+        Cursor cursor = databaseHelper.getReadableDatabase().rawQuery("SELECT id, username FROM user WHERE username = ?", new String[]{username});
         if (cursor != null && cursor.moveToFirst()) {
             int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             String user = cursor.getString(cursor.getColumnIndexOrThrow("username"));
@@ -39,7 +39,7 @@ public class UserDao {
     }
 
     public UserEntity getUser(int id) {
-        Cursor cursor = databaseHelper.getReadableDatabase().rawQuery("SELECT id, username FROM users WHERE id = ?", new String[]{String.valueOf(id)});
+        Cursor cursor = databaseHelper.getReadableDatabase().rawQuery("SELECT id, username FROM user WHERE id = ?", new String[]{String.valueOf(id)});
         if (cursor != null && cursor.moveToFirst()) {
             int userId = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             String username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
