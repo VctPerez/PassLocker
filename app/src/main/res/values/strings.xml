@@ -3,8 +3,20 @@
     <string name="auth_keys">Authentication Keys</string>
     <string name="passwords">Passwords</string>
     <string name="language">Language</string>
+    <string name="uppercaseOption">Uppercase</string>
     <string-array name="translation_options">
         <item>Spanish</item>
         <item>English</item>
     </string-array>
+    <string name="specialCharOption">Special characters</string>
+    <string name="numbersOption">Numbers [0-9]</string>
+    <string name="passwordOptions">Password options:</string>
+    <string name="generateButton">Generate</string>
+    <string name="titleInput">Title</string>
+    <string name="passswordInput">Password</string>
+    <string name="notesInput">Notes (Optional)</string>
+    <string name="urlInput">URL (Optional)</string>
+    <string name="saveButton">Save</string>
+    <string name="gotoCreateButton">Create Password</string>
+    <string name="gotoListButton">Show Passwords</string>
 </resources>
