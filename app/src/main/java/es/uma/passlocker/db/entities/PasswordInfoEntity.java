@@ -8,13 +8,23 @@ public class PasswordInfoEntity {
     private String siteUrl;
     private String notes;
     private UserEntity user;
+    private String password;
 
-    public PasswordInfoEntity(int id, UserEntity user, String siteName, String siteUrl, String notes) {
+    public PasswordInfoEntity(int id, UserEntity user, String siteName, String siteUrl, String notes, String password) {
         setId(id);
         setNotes(notes);
         setUser(user);
         setSiteName(siteName);
         setSiteUrl(siteUrl);
+        setPassword(password);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getId() {

@@ -33,8 +33,6 @@ public class AuthKeysActivity extends AppCompatActivity {
 
     private void initList(){
         authKeyList = new ArrayList<>();
-        authKeyList.add(new PasswordInfoEntity(1, new UserEntity(1,"username"), "Steam", "www.google.es", null));
 
-        authKeyList.add(new PasswordInfoEntity(2, new UserEntity(1,"username"), "Epic Games", "www.google.es", "Fornai"));
     }
 }

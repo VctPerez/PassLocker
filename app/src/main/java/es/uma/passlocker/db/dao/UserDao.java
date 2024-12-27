@@ -13,8 +13,8 @@ public class UserDao {
         this.databaseHelper = DatabaseHelper.getInstance();
     }
 
-    public void insertUser(String username) {
-        databaseHelper.getWritableDatabase().execSQL("INSERT INTO users (username) VALUES ('" + username + "')");
+    public void insertUser(String username, String password) {
+        databaseHelper.getWritableDatabase().execSQL("INSERT INTO users (username, password) VALUES ('" + username + "', '" + password + "')");
     }
 
     public void deleteUser(String username) {
@@ -30,8 +30,9 @@ public class UserDao {
         if (cursor != null && cursor.moveToFirst()) {
             int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             String user = cursor.getString(cursor.getColumnIndexOrThrow("username"));
+            String password = cursor.getString(cursor.getColumnIndexOrThrow("password"));
             cursor.close();
-            return new UserEntity(id, user);
+            return new UserEntity(id, user, password);
         } else {
             return null;
         }
@@ -42,8 +43,9 @@ public class UserDao {
         if (cursor != null && cursor.moveToFirst()) {
             int userId = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             String username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
+            String password = cursor.getString(cursor.getColumnIndexOrThrow("password"));
             cursor.close();
-            return new UserEntity(userId, username);
+            return new UserEntity(userId, username, password);
         } else {
             return null;
         }

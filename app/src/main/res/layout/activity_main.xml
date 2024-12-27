@@ -9,27 +9,26 @@
 
     <!-- Botón "Claves de autenticación" -->
     <Button
-        android:id="@+id/auth_keys_button"
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Claves de Autenticación"
-        android:textColor="#FFFFFF"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#6200EE"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:padding="12dp"
-        android:layout_marginBottom="16dp" />
+        android:text="Inicio de sesión"
+        android:textColor="#FFFFFF" />
 
     <!-- Botón "Contraseñas" -->
     <Button
-        android:id="@+id/passwords_button"
+        android:id="@+id/register_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Contraseñas"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#6200EE"
-        android:layout_below="@id/auth_keys_button"
+        android:layout_below="@id/login_button"
         android:layout_centerHorizontal="true"
-        android:padding="12dp" />
+        android:backgroundTint="#6200EE"
+        android:padding="12dp"
+        android:text="Registrarse"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>

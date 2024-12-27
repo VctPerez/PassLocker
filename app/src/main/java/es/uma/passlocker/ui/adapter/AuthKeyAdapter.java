@@ -44,9 +44,9 @@ public class AuthKeyAdapter extends RecyclerView.Adapter<AuthKeyAdapter.AuthKeyV
     @Override
     public void onBindViewHolder(@NonNull AuthKeyAdapter.AuthKeyViewHolder holder, int position) {
         PasswordInfoEntity currentItem = authKeyList.get(position);
-        holder.tvAuthKey.setText(currentItem.getAuthKey());
+        // holder.tvAuthKey.setText(currentItem.getAuthKey());
         holder.tvUsername.setText(currentItem.getUser().getUsername());
-        holder.tvSite.setText(currentItem.getSite().getName());
+        // holder.tvSite.setText(currentItem.getSite().getName());
     }
 
     @Override
