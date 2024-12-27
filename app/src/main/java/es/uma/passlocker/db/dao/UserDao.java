@@ -5,6 +5,8 @@ import es.uma.passlocker.db.entities.UserEntity;
 
 import android.database.Cursor;
 
+import java.util.Arrays;
+
 public class UserDao {
     private DatabaseHelper databaseHelper;
     private static UserDao userDao;
@@ -26,8 +28,9 @@ public class UserDao {
     }
 
     public UserEntity getUser(String username) {
-        Cursor cursor = databaseHelper.getReadableDatabase().rawQuery("SELECT id, username FROM user WHERE username = ?", new String[]{username});
+        Cursor cursor = databaseHelper.getReadableDatabase().rawQuery("SELECT * FROM user WHERE username = ?", new String[]{username});
         if (cursor != null && cursor.moveToFirst()) {
+            System.out.println("Columnas: " +Arrays.toString(cursor.getColumnNames()));
             int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             String user = cursor.getString(cursor.getColumnIndexOrThrow("username"));
             String password = cursor.getString(cursor.getColumnIndexOrThrow("password"));

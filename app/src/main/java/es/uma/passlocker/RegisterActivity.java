@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
                 this.saveUser(email, hashedPassword);
 
                 Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(RegisterActivity.this, PasswordsActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, MenuActivity.class);
                 startActivity(intent);
 
             } catch (Exception e) {
@@ -85,5 +85,6 @@ public class RegisterActivity extends AppCompatActivity {
         System.out.println(password);
         UserDao userDao = UserDao.getInstance();
         userDao.insertUser(email, password);
+        System.out.println(userDao.getUser(email));
     }
 }

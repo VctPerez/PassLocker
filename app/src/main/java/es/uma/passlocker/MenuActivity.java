@@ -1,5 +1,6 @@
 package es.uma.passlocker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,12 +23,13 @@ public class MenuActivity extends AppCompatActivity {
 
         Button btnCreatePassword = findViewById(R.id.goToCreateButton);
         btnCreatePassword.setOnClickListener(v -> {
-            //TODO
+            Intent intent = new Intent(MenuActivity.this, CreatePasswordActivity.class);
+            startActivity(intent);
         });
 
         Button btnListPasswords = findViewById(R.id.goToListButton);
         btnListPasswords.setOnClickListener(v -> {
-            //TODO
+//            Intent intent = new Intent(MenuActivity.this, ListPasswordsActivity.class);
         });
     }
 

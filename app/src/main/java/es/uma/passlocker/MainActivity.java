@@ -15,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DatabaseHelper.getInstance(getApplicationContext());
+//        getApplicationContext().deleteDatabase("passlocker.db");
+        DatabaseHelper.init(getApplicationContext());
 
         loginButton = findViewById(R.id.login_button);
         registerButton = findViewById(R.id.register_button);

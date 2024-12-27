@@ -9,16 +9,16 @@ import androidx.annotation.Nullable;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "passlocker.db";
-    private static final int DATABASE_VERSION = 22;
+    private static final int DATABASE_VERSION = 1;
     private static DatabaseHelper databaseHelper;
+
     private DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("DROP TABLE IF EXISTS user");
-        db.execSQL("DROP TABLE IF EXISTS password_info");
         String userScript =
                 "CREATE TABLE user (" +
                 "    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
@@ -38,6 +38,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         
         db.execSQL(userScript);
         db.execSQL(passwordScript);
+        System.out.println("Database created");
+        System.out.println(db);
     }
 
     @Override
@@ -47,11 +49,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public static DatabaseHelper getInstance(Context context) {
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS user");
+        db.execSQL("DROP TABLE IF EXISTS password_info");
+        onCreate(db);
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        System.out.println("Database opened");
+        super.onOpen(db);
+    }
+
+    public static void init(Context context) {
         if (databaseHelper == null) {
             databaseHelper = new DatabaseHelper(context);
         }
-        return databaseHelper;
     }
 
     public static DatabaseHelper getInstance() {
