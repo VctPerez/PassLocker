@@ -38,7 +38,7 @@ public class KeyStoreHelper {
     public static SecretKey getKey() throws Exception {
         KeyStore keyStore = KeyStore.getInstance(ANDROID_KEYSTORE);
         keyStore.load(null);
-        //clearKey();
+//        clearKey();
         generateKey();
         // Asegúrate de que la clave esté en el Keystore y sea del tipo adecuado
         KeyStore.Entry entry = keyStore.getEntry(KEY_ALIAS, null);

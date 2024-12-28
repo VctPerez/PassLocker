@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import java.util.Base64;
 
 import es.uma.passlocker.db.dao.PasswordInfoDao;
 import es.uma.passlocker.keyStore.EncryptionHelper;
+import es.uma.passlocker.utils.PasswordGenerator;
 
 public class CreatePasswordActivity extends AppCompatActivity {
 
@@ -62,7 +64,6 @@ public class CreatePasswordActivity extends AppCompatActivity {
         Button generateButton = findViewById(R.id.generateButton);
         generateButton.setOnClickListener(v -> {
             generatePassword();
-
         });
 
         buttonTogglePassword.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +108,14 @@ public class CreatePasswordActivity extends AppCompatActivity {
     }
 
     private void generatePassword() {
-        // Generate password
+        CheckBox cbUpper = findViewById(R.id.checkBoxUppercase);
+        CheckBox cbDigits = findViewById(R.id.checkBoxDigits);
+        CheckBox cbSpecial = findViewById(R.id.checkBoxSpecialChars);
+
+        EditText etPassword = findViewById(R.id.editTextPassword);
+
+        String password = PasswordGenerator.generate(20, cbUpper.isChecked(), cbDigits.isChecked(), cbSpecial.isChecked());
+        etPassword.setText(password);
     }
 
 }
