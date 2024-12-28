@@ -29,7 +29,8 @@ public class MenuActivity extends AppCompatActivity {
 
         Button btnListPasswords = findViewById(R.id.goToListButton);
         btnListPasswords.setOnClickListener(v -> {
-//            Intent intent = new Intent(MenuActivity.this, ListPasswordsActivity.class);
+            Intent intent = new Intent(MenuActivity.this, PasswordListActivity.class);
+            startActivity(intent);
         });
     }
 

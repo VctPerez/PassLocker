@@ -1,6 +1,7 @@
 package es.uma.passlocker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,12 +41,20 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 byte[] encryptedPassword = password.getBytes();
 
-                // Generar el hash de la contraseña cifrada
+                // Generar el hash de la contraseña
                 String hashedPassword = HashHelper.generateHash(encryptedPassword);
 
                 if(checkPassword(email, hashedPassword)) {
                     Toast.makeText(this, "Login exitoso", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, PasswordsActivity.class);
+
+                    int userId = getUserId(email);
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("loggedInUserId", userId);
+                    editor.apply();
+
+                    Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(this, "Credenciales erroneas", Toast.LENGTH_SHORT).show();
@@ -62,5 +71,11 @@ public class LoginActivity extends AppCompatActivity {
         UserDao userDao = UserDao.getInstance();
         UserEntity user = userDao.getUser(email);
         return hashedPassword.equals(user.getPassword());
+    }
+
+    private int getUserId(String email) {
+        UserDao userDao = UserDao.getInstance();
+        UserEntity user = userDao.getUser(email);
+        return user.getId();
     }
 }

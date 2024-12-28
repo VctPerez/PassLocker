@@ -42,7 +42,7 @@ public class UserDao {
     }
 
     public UserEntity getUser(int id) {
-        Cursor cursor = databaseHelper.getReadableDatabase().rawQuery("SELECT id, username FROM user WHERE id = ?", new String[]{String.valueOf(id)});
+        Cursor cursor = databaseHelper.getReadableDatabase().rawQuery("SELECT * FROM user WHERE id = ?", new String[]{String.valueOf(id)});
         if (cursor != null && cursor.moveToFirst()) {
             int userId = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             String username = cursor.getString(cursor.getColumnIndexOrThrow("username"));

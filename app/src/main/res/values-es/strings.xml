@@ -18,4 +18,5 @@
     <string name="saveButton">Guardar</string>
     <string name="gotoCreateButton">Crear contraseña</string>
     <string name="gotoListButton">Ver Contraseñas</string>
+    <string name="show_password">Mostrar Contraseña</string>
 </resources>

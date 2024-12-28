@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AuthKeysActivity" />
-        <activity android:name=".PasswordsActivity" />
+        <activity android:name=".PasswordListActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".CreatePasswordActivity" />

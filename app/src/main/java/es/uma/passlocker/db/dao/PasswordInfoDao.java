@@ -4,6 +4,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import es.uma.passlocker.db.DatabaseHelper;
 import es.uma.passlocker.db.entities.PasswordInfoEntity;
 
@@ -74,6 +77,35 @@ public class PasswordInfoDao {
         } else {
             return null;
         }
+    }
+
+    public PasswordInfoEntity getPasswordInfo(String name) {
+        Cursor cursor = databaseHelper.getReadableDatabase().rawQuery("SELECT id, user_id, site_name, site_url, notes, password FROM password_info WHERE site_name = ?", new String[]{name});
+        if (cursor != null && cursor.moveToFirst()) {
+            int userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"));
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            String siteName = cursor.getString(cursor.getColumnIndexOrThrow("site_name"));
+            String siteUrl = cursor.getString(cursor.getColumnIndexOrThrow("site_url"));
+            String notes = cursor.getString(cursor.getColumnIndexOrThrow("notes"));
+            String password = cursor.getString(cursor.getColumnIndexOrThrow("password"));
+            cursor.close();
+            return new PasswordInfoEntity(id, UserDao.getInstance().getUser(userId), siteName, siteUrl, notes, password);
+        } else {
+            return null;
+        }
+    }
+
+    public List<String> getUserPasswords(String user_id) {
+        List<String> siteNames = new ArrayList<>();
+        Cursor cursor = databaseHelper.getReadableDatabase().rawQuery("SELECT site_name FROM password_info WHERE user_id = ?", new String[]{user_id});
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String siteName = cursor.getString(cursor.getColumnIndexOrThrow("site_name"));
+                siteNames.add(siteName);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return siteNames;
     }
 
 
