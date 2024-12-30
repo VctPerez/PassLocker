@@ -19,4 +19,15 @@
     <string name="gotoCreateButton">Crear contraseña</string>
     <string name="gotoListButton">Ver Contraseñas</string>
     <string name="show_password">Mostrar Contraseña</string>
+    <string name="signInException">Credenciales incorrectas</string>
+    <string name="registerUserException">EL usuario ya está registrado</string>
+    <string name="registerPasswordException">Las contraseñas no coinciden</string>
+    <string name="okButton">Aceptar</string>
+    <string name="registerButton">Registrarse</string>
+    <string name="confirmPasswordInput">Confirmar contraseñas</string>
+    <string name="usernameInput">Nombre de usuario</string>
+    <string name="loginButton">Iniciar sesión</string>
+    <string name="emptyPasswordFields">Debes introducir un título y una contraseña</string>
+    <string name="successGeneration">Contraseña generada correctamente</string>
+    <string name="successSave">Contraseña guardada correctamente</string>
 </resources>

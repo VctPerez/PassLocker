@@ -1,6 +1,7 @@
 package es.uma.passlocker;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -15,7 +16,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        getApplicationContext().deleteDatabase("passlocker.db");
+        AnimationDrawable animationDrawable = (AnimationDrawable) findViewById(R.id.main_layout).getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
+
         DatabaseHelper.init(getApplicationContext());
 
         loginButton = findViewById(R.id.login_button);

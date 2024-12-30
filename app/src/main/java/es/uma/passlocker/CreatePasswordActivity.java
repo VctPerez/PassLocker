@@ -1,15 +1,16 @@
 package es.uma.passlocker;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,6 +35,10 @@ public class CreatePasswordActivity extends AppCompatActivity {
         String instanceNotes = getIntent().getStringExtra("notes");
 
         setContentView(R.layout.activity_create_password);
+        AnimationDrawable animationDrawable = (AnimationDrawable) findViewById(R.id.main_layout).getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
 
         Button buttonTogglePassword = findViewById(R.id.buttonTogglePassword);
         EditText etPassword = findViewById(R.id.editTextPassword);
@@ -57,6 +62,7 @@ public class CreatePasswordActivity extends AppCompatActivity {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+            // TODO COMPROBAR ANTES QUE NO HA HABIDO FALLO
             Intent intent = new Intent(CreatePasswordActivity.this, MenuActivity.class);
             startActivity(intent);
         });
@@ -89,7 +95,13 @@ public class CreatePasswordActivity extends AppCompatActivity {
 
     private void savePassword(String password, String title, String url, String notes, int id) throws Exception {
         if (password.isEmpty() || title.isEmpty()) {
-            Toast.makeText(this, "Parámetros obligatorios vacíos", Toast.LENGTH_SHORT).show();
+            String okButton = getString(R.string.okButton);
+            String errorMesage = getString(R.string.emptyPasswordFields);
+            new AlertDialog.Builder(this)
+                    .setTitle("Error")
+                    .setMessage(errorMesage)
+                    .setPositiveButton(okButton, (dialog, which) -> dialog.dismiss())
+                    .show();
             return;
         }
         SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
@@ -103,7 +115,8 @@ public class CreatePasswordActivity extends AppCompatActivity {
         } else {
             pwInfoDao.updatePasswordInfo(id, title, url, notes, Base64.getEncoder().encodeToString(encryptedPassword));
         }
-
+        String successMessage = getString(R.string.successSave);
+        Snackbar.make(findViewById(R.id.main_layout), successMessage, Snackbar.LENGTH_LONG).show();
 
     }
 
@@ -116,6 +129,8 @@ public class CreatePasswordActivity extends AppCompatActivity {
 
         String password = PasswordGenerator.generate(20, cbUpper.isChecked(), cbDigits.isChecked(), cbSpecial.isChecked());
         etPassword.setText(password);
+        String successMessage = getString(R.string.successGeneration);
+        Snackbar.make(findViewById(R.id.main_layout), successMessage, Snackbar.LENGTH_LONG).show();
     }
 
 }

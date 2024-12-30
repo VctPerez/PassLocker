@@ -20,4 +20,15 @@
     <string name="gotoCreateButton">Create Password</string>
     <string name="gotoListButton">Show Passwords</string>
     <string name="show_password">Show Password</string>
+    <string name="signInException">Wrong credentials</string>
+    <string name="registerUserException">User is already registered</string>
+    <string name="registerPasswordException">Passwords don\'t match</string>
+    <string name="okButton">Ok</string>
+    <string name="registerButton">Register</string>
+    <string name="confirmPasswordInput">Confirm Password</string>
+    <string name="usernameInput">Username</string>
+    <string name="loginButton">Sign In</string>
+    <string name="emptyPasswordFields">You must introduce a password and a title</string>
+    <string name="successGeneration">Password generated successfully</string>
+    <string name="successSave">Password saved succesfully</string>
 </resources>

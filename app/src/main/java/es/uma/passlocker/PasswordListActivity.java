@@ -2,6 +2,7 @@ package es.uma.passlocker;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -31,6 +32,10 @@ public class PasswordListActivity extends AppCompatActivity {
 
         rvNames = findViewById(R.id.rvNames);
         rvNames.setLayoutManager(new LinearLayoutManager(this));
+        AnimationDrawable animationDrawable = (AnimationDrawable) findViewById(R.id.main_layout).getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
 
         List<String> nameList = loadNamesFromDatabase();
 

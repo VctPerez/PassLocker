@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomButton">
+
+        <item name="android:backgroundTint">#61a8ff</item>
+
+        <item name="android:background">@drawable/rounded_button</item>
+
+        <item name="android:textColor">#FFFFFF</item>
+
+        <item name="android:textSize">16sp</item>
+
+        <item name="android:elevation">4dp</item>
+
+        <item name="android:layout_margin">8dp</item>
+    </style>
+</resources>

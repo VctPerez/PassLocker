@@ -1,7 +1,10 @@
 package es.uma.passlocker;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +28,10 @@ public class LoginActivity extends AppCompatActivity {
         EditText etEmail = findViewById(R.id.etEmail);
         EditText etPassword = findViewById(R.id.etPassword);
         Button btnLogin = findViewById(R.id.btnLogin);
+        AnimationDrawable animationDrawable = (AnimationDrawable) findViewById(R.id.main_layout).getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
 
          try {
             KeyStoreHelper.generateKey();
@@ -38,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
             String email = etEmail.getText().toString();
             String password = etPassword.getText().toString();
 
+            String errorMesage = getString(R.string.signInException);
+            String okButton = getString(R.string.okButton);
             try {
                 byte[] encryptedPassword = password.getBytes();
 
@@ -57,11 +66,19 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(this, "Credenciales erroneas", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(this)
+                            .setTitle("Error")
+                            .setMessage(errorMesage)
+                            .setPositiveButton(okButton, (dialog, which) -> dialog.dismiss())
+                            .show();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(this, "Error al procesar la contraseña", Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(this)
+                        .setTitle("Error")
+                        .setMessage(errorMesage)
+                        .setPositiveButton(okButton, (dialog, which) -> dialog.dismiss())
+                        .show();
             }
         });
     }

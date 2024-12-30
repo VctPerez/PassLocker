@@ -1,7 +1,9 @@
 package es.uma.passlocker;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +23,10 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        AnimationDrawable animationDrawable = (AnimationDrawable) findViewById(R.id.main_layout).getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
 
         EditText etEmail = findViewById(R.id.etEmail);
         EditText etPassword = findViewById(R.id.etPassword);
@@ -75,13 +81,24 @@ public class RegisterActivity extends AppCompatActivity {
         UserDao userDao = UserDao.getInstance();
         UserEntity user = userDao.getUser(email);
         if (user != null) {
-            Toast.makeText(this, "Usuario ya registrado", Toast.LENGTH_SHORT).show();
+            String message = getString(R.string.registerUserException);
+            String okButton = getString(R.string.okButton);
+            new AlertDialog.Builder(this)
+                    .setTitle("Error")
+                    .setMessage(message)
+                    .setPositiveButton(okButton, (dialog, which) -> dialog.dismiss())
+                    .show();
             return false;
         }
 
         if (!password.equals(confirmPassword)) {
-            Toast.makeText(this, "Las contraseñas deben ser iguales", Toast.LENGTH_SHORT).show();
-            return false;
+            String message = getString(R.string.registerPasswordException);
+            String okButton = getString(R.string.okButton);
+            new AlertDialog.Builder(this)
+                    .setTitle("Error")
+                    .setMessage(message)
+                    .setPositiveButton(okButton, (dialog, which) -> dialog.dismiss())
+                    .show();            return false;
         }
 
         return true;

@@ -12,6 +12,9 @@ public class PasswordGenerator {
     private static final String SPECIAL = "!@#$%^&*()_+-=[]|,./?><";
 
     public static String generate(Integer length, boolean upper, boolean digits, boolean special) {
+        if (length == null || length <= 0) {
+            throw new IllegalArgumentException("Password length must be a positive integer");
+        }
         int minLen = getMinLen(upper, digits, special);
         if (length < minLen) {
             throw new IllegalArgumentException("Password length must be at least " + minLen);
