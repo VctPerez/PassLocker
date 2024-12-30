@@ -30,4 +30,5 @@
     <string name="emptyPasswordFields">Debes introducir un título y una contraseña</string>
     <string name="successGeneration">Contraseña generada correctamente</string>
     <string name="successSave">Contraseña guardada correctamente</string>
+    <string name="deleteButton">Eliminar</string>
 </resources>

@@ -41,6 +41,8 @@ public class CreatePasswordActivity extends AppCompatActivity {
         animationDrawable.start();
 
         Button buttonTogglePassword = findViewById(R.id.buttonTogglePassword);
+        Button buttonDelete = findViewById(R.id.buttonDelete);
+        if (id == 0) buttonDelete.setVisibility(View.INVISIBLE);
         EditText etPassword = findViewById(R.id.editTextPassword);
         EditText etTitle = findViewById(R.id.editTextTitle);
         EditText etUrl = findViewById(R.id.editTextURL);
@@ -59,10 +61,22 @@ public class CreatePasswordActivity extends AppCompatActivity {
             String notes = etNotes.getText().toString();
             try {
                 savePassword(password, title, url, notes, id);
+                Intent intent = new Intent(CreatePasswordActivity.this, MenuActivity.class);
+                startActivity(intent);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                String okButton = getString(R.string.okButton);
+                String errorMesage = getString(R.string.emptyPasswordFields);
+                new AlertDialog.Builder(this)
+                        .setTitle("Error")
+                        .setMessage(errorMesage)
+                        .setPositiveButton(okButton, (dialog, which) -> dialog.dismiss())
+                        .show();
             }
-            // TODO COMPROBAR ANTES QUE NO HA HABIDO FALLO
+        });
+
+        buttonDelete.setOnClickListener(v -> {
+            PasswordInfoDao pwInfoDao = PasswordInfoDao.getInstance();
+            pwInfoDao.deletePasswordInfo(id);
             Intent intent = new Intent(CreatePasswordActivity.this, MenuActivity.class);
             startActivity(intent);
         });
@@ -95,14 +109,7 @@ public class CreatePasswordActivity extends AppCompatActivity {
 
     private void savePassword(String password, String title, String url, String notes, int id) throws Exception {
         if (password.isEmpty() || title.isEmpty()) {
-            String okButton = getString(R.string.okButton);
-            String errorMesage = getString(R.string.emptyPasswordFields);
-            new AlertDialog.Builder(this)
-                    .setTitle("Error")
-                    .setMessage(errorMesage)
-                    .setPositiveButton(okButton, (dialog, which) -> dialog.dismiss())
-                    .show();
-            return;
+            throw new Exception();
         }
         SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
         int userId = sharedPreferences.getInt("loggedInUserId", 0);
