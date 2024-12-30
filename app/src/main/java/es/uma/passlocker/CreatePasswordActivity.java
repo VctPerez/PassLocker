@@ -1,5 +1,6 @@
 package es.uma.passlocker;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.TextView;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +27,8 @@ import es.uma.passlocker.utils.PasswordGenerator;
 public class CreatePasswordActivity extends AppCompatActivity {
 
     private boolean isPasswordVisible = false;
+    private SeekBar sbLength;
+    private TextView tvLength;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,28 +89,56 @@ public class CreatePasswordActivity extends AppCompatActivity {
 
         Button generateButton = findViewById(R.id.generateButton);
         generateButton.setOnClickListener(v -> {
-            generatePassword();
-        });
-
-        buttonTogglePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isPasswordVisible) {
-                    // Si la contraseña es visible, ocultarla
-                    etPassword.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    buttonTogglePassword.setText("Mostrar Contraseña");
-                } else {
-                    // Si la contraseña está oculta, mostrarla
-                    etPassword.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    buttonTogglePassword.setText("Ocultar Contraseña");
-                }
-                // Cambiar el estado de visibilidad
-                isPasswordVisible = !isPasswordVisible;
-
-                // Mover el cursor al final del texto
-                etPassword.setSelection(etPassword.length());
+            try{
+                generatePassword();
+            }catch (Exception e){
+                String okButton = getString(R.string.okButton);
+                String errorMesage = getString(R.string.generatePasswordException);
+                new AlertDialog.Builder(this)
+                        .setTitle("Error")
+                        .setMessage(errorMesage)
+                        .setPositiveButton(okButton, (dialog, which) -> dialog.dismiss())
+                        .show();
             }
         });
+
+        buttonTogglePassword.setOnClickListener(v -> {
+            if (isPasswordVisible) {
+                // Si la contraseña es visible, ocultarla
+                etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                buttonTogglePassword.setText(getString(R.string.show_password));
+            } else {
+                // Si la contraseña está oculta, mostrarla
+                etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                buttonTogglePassword.setText(getString(R.string.hidePassword));
+            }
+            // Cambiar el estado de visibilidad
+            isPasswordVisible = !isPasswordVisible;
+
+            // Mover el cursor al final del texto
+            etPassword.setSelection(etPassword.length());
+        });
+
+        sbLength = findViewById(R.id.seekBarPasswordLength);
+        tvLength = findViewById(R.id.lengthTag);
+        sbLength.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                tvLength.setText(getString(R.string.lengthTag) + " " + progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // No hacer nada
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // No hacer nada
+            }
+        });
+
     }
 
     private void savePassword(String password, String title, String url, String notes, int id) throws Exception {
@@ -134,7 +168,7 @@ public class CreatePasswordActivity extends AppCompatActivity {
 
         EditText etPassword = findViewById(R.id.editTextPassword);
 
-        String password = PasswordGenerator.generate(20, cbUpper.isChecked(), cbDigits.isChecked(), cbSpecial.isChecked());
+        String password = PasswordGenerator.generate(sbLength.getProgress(), cbUpper.isChecked(), cbDigits.isChecked(), cbSpecial.isChecked());
         etPassword.setText(password);
         String successMessage = getString(R.string.successGeneration);
         Snackbar.make(findViewById(R.id.main_layout), successMessage, Snackbar.LENGTH_LONG).show();
