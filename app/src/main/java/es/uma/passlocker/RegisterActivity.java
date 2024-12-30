@@ -34,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         Button btnRegister = findViewById(R.id.btnRegister);
 
         try {
-            KeyStoreHelper.generateKey();
+            KeyStoreHelper.getKey();
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Error al inicializar KeyStore", Toast.LENGTH_SHORT).show();

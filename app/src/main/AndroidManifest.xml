@@ -27,7 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AuthKeysActivity" />
         <activity android:name=".PasswordListActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />

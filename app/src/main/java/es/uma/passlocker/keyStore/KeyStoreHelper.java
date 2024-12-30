@@ -9,7 +9,7 @@ import java.security.KeyStore;
 
 public class KeyStoreHelper {
 
-    private static final String KEY_ALIAS = "MyKeyAlias";  // Alias de la clave almacenada en Keystore
+    private static final String KEY_ALIAS = "PassLockerAlias";  // Alias de la clave almacenada en Keystore
     private static final String ANDROID_KEYSTORE = "AndroidKeyStore";
 
     // Inicializar KeyStore y generar la clave AES si no existe
@@ -38,7 +38,7 @@ public class KeyStoreHelper {
     public static SecretKey getKey() throws Exception {
         KeyStore keyStore = KeyStore.getInstance(ANDROID_KEYSTORE);
         keyStore.load(null);
-//        clearKey();
+        //clearKey();
         generateKey();
         // Asegúrate de que la clave esté en el Keystore y sea del tipo adecuado
         KeyStore.Entry entry = keyStore.getEntry(KEY_ALIAS, null);
