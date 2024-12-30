@@ -12,17 +12,18 @@ public class KeyStoreHelper {
     private static final String KEY_ALIAS = "PassLockerAlias";  // Alias de la clave almacenada en Keystore
     private static final String ANDROID_KEYSTORE = "AndroidKeyStore";
 
-    // Inicializar KeyStore y generar la clave AES si no existe
+    /**
+     * Generate AES key and store it in the Android Keystore
+     * @throws Exception
+     */
     public static void generateKey() throws Exception {
         KeyStore keyStore = KeyStore.getInstance(ANDROID_KEYSTORE);
         keyStore.load(null);
 
-        // Si ya existe, no es necesario generar la clave nuevamente
         if (keyStore.containsAlias(KEY_ALIAS)) {
             return;
         }
 
-        // Generar una clave AES (clave secreta)
         KeyGenerator keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, ANDROID_KEYSTORE);
         keyGenerator.init(
                 new KeyGenParameterSpec.Builder(KEY_ALIAS,
@@ -31,10 +32,14 @@ public class KeyStoreHelper {
                         .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
                         .build()
         );
-        keyGenerator.generateKey();  // Genera y almacena la clave en el Keystore
+        keyGenerator.generateKey();
     }
 
-    // Obtener la clave AES almacenada en Keystore
+    /**
+     * Get the AES key from the Android Keystore
+     * @return the AES key
+     * @throws Exception if the key is not found
+     */
     public static SecretKey getKey() throws Exception {
         KeyStore keyStore = KeyStore.getInstance(ANDROID_KEYSTORE);
         keyStore.load(null);
@@ -50,6 +55,10 @@ public class KeyStoreHelper {
         }
     }
 
+    /**
+     * Delete the AES key from the Android Keystore
+     * @throws Exception
+     */
     public static void clearKey() throws Exception {
         KeyStore keyStore = KeyStore.getInstance(ANDROID_KEYSTORE);
         keyStore.load(null);

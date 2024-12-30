@@ -12,7 +12,12 @@ public class EncryptionHelper {
     private static final String KEY_ALIAS = "MyKeyAlias";
     private static final String TRANSFORMATION = "AES/GCM/NoPadding"; // Usamos AES/GCM
 
-    // Cifrar datos (contraseña)
+    /**
+     * Encrypt data (password)
+     * @param data the data to encrypt
+     * @return the encrypted data
+     * @throws Exception if the encryption fails
+     */
     public static byte[] encrypt(String data) throws Exception {
         SecretKey key = KeyStoreHelper.getKey(); // Obtenemos la clave secreta
 
@@ -31,28 +36,30 @@ public class EncryptionHelper {
         return combined; // Devolver los datos cifrados + IV concatenados
     }
 
-    // Descifrar datos (contraseña)
-    // Descifrar datos (contraseña)
+    /**
+     * Decrypt data (password)
+     * @param encryptedData the data to decrypt
+     * @return the decrypted data
+     * @throws Exception if the decryption fails
+     */
     public static String decrypt(byte[] encryptedData) throws Exception {
-        SecretKey key = KeyStoreHelper.getKey(); // Obtenemos la clave secreta
+        SecretKey key = KeyStoreHelper.getKey();
 
-        // Extraemos el IV (primeros 12 bytes) y los datos cifrados (resto)
-        byte[] iv = new byte[12]; // El IV tiene un tamaño fijo de 12 bytes en AES/GCM
+
+        byte[] iv = new byte[12];
         System.arraycopy(encryptedData, 0, iv, 0, iv.length);
 
         byte[] encryptedText = new byte[encryptedData.length - iv.length];
         System.arraycopy(encryptedData, iv.length, encryptedText, 0, encryptedText.length);
 
-        // Descifrar usando el IV extraído
         Cipher cipher = Cipher.getInstance(TRANSFORMATION);
         GCMParameterSpec spec = new GCMParameterSpec(128, iv); // 128 bits de autenticación
         cipher.init(Cipher.DECRYPT_MODE, key, spec);
 
         try {
             byte[] decryptedText = cipher.doFinal(encryptedText);
-            return new String(decryptedText); // Devolver el texto descifrado
+            return new String(decryptedText);
         } catch (Exception e) {
-            // Lanzar excepción si la autenticación falla
             throw new RuntimeException("Error al descifrar los datos: " + e.getMessage());
         }
     }

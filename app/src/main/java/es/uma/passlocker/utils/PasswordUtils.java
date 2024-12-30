@@ -15,6 +15,14 @@ public class PasswordUtils {
     private static final int MEDIUM = 75;
     private static final int STRONG = 100;
 
+    /**
+     * Generate a random password with the specified length and character groups.
+     * @param length the length of the password
+     * @param upper include uppercase letters
+     * @param digits include digits
+     * @param special include special characters
+     * @return a random password
+     */
     public static String generate(Integer length, boolean upper, boolean digits, boolean special) {
         if (length == null || length <= 0) {
             throw new IllegalArgumentException("Password length must be a positive integer");
@@ -70,6 +78,11 @@ public class PasswordUtils {
         return charset;
     }
 
+    /**
+     * Check the strength of a password based on its time to be broken by brute-force.
+     * @param password
+     * @return strength-scale of the password
+     */
     public static int checkStrength(String password) {
         int passwordLength = password.length();
         if (passwordLength == 0) {

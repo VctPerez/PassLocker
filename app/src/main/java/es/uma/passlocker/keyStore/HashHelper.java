@@ -4,7 +4,13 @@ import java.security.MessageDigest;
 
 public class HashHelper {
 
-    // Generar un hash usando SHA-256
+
+    /**
+     * Generate a SHA-256 hash from the given data
+     * @param data the data to hash
+     * @return the hash as a hexadecimal string
+     * @throws Exception if the hash algorithm is not found
+     */
     public static String generateHash(byte[] data) throws Exception {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] hash = digest.digest(data);

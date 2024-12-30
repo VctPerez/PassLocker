@@ -17,7 +17,7 @@ public class UserEntity {
         return password;
     }
 
-    public void setPassword(String password) {
+    private void setPassword(String password) {
         this.password = password;
     }
 

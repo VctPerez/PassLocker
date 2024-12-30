@@ -23,7 +23,7 @@ public class PasswordInfoEntity {
         return password;
     }
 
-    public void setPassword(String password) {
+    private void setPassword(String password) {
         this.password = password;
     }
 
@@ -42,7 +42,7 @@ public class PasswordInfoEntity {
         return siteName;
     }
 
-    public void setSiteName(String siteName) {
+    private void setSiteName(String siteName) {
         this.siteName = siteName;
     }
 
@@ -50,7 +50,7 @@ public class PasswordInfoEntity {
         return siteUrl;
     }
 
-    public void setSiteUrl(String siteUrl) {
+    private void setSiteUrl(String siteUrl) {
         this.siteUrl = siteUrl;
     }
 
@@ -58,7 +58,7 @@ public class PasswordInfoEntity {
         return notes;
     }
 
-    public void setNotes(String notes) {
+    private void setNotes(String notes) {
         this.notes = notes;
     }
 
