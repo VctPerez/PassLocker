@@ -35,4 +35,8 @@
     <string name="lengthTag">Length:</string>
     <string name="generatePasswordException">Invalid password length</string>
     <string name="deleteButton">Delete</string>
+    <string name="keyStoreError">Error loading Key Store</string>
+    <string name="passwordRegistration">Error processing your password</string>
+    <string name="registerSuccess">Register Success</string>
+    <string name="loginSuccess">Login Success</string>
 </resources>

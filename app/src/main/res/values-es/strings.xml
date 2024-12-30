@@ -34,4 +34,8 @@
     <string name="lengthTag">Longitud:</string>
     <string name="generatePasswordException">Longitud de contraseña invalida</string>
     <string name="deleteButton">Eliminar</string>
+    <string name="keyStoreError">Error al cargar Key Store</string>
+    <string name="passwordRegistration">Error al procesar la contraseña</string>
+    <string name="registerSuccess">Registro exitoso</string>
+    <string name="loginSuccess">Inicio de sesión exitoso</string>
 </resources>

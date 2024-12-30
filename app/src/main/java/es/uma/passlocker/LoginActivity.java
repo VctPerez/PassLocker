@@ -37,7 +37,13 @@ public class LoginActivity extends AppCompatActivity {
             KeyStoreHelper.generateKey();
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error al inicializar KeyStore", Toast.LENGTH_SHORT).show();
+             String okButton = getString(R.string.okButton);
+             String errorMesage = getString(R.string.keyStoreError);
+             new AlertDialog.Builder(this)
+                     .setTitle("Error")
+                     .setMessage(errorMesage)
+                     .setPositiveButton(okButton, (dialog, which) -> dialog.dismiss())
+                     .show();
             return;
         }
 
@@ -54,7 +60,8 @@ public class LoginActivity extends AppCompatActivity {
                 String hashedPassword = HashHelper.generateHash(encryptedPassword);
 
                 if(checkPassword(email, hashedPassword)) {
-                    Toast.makeText(this, "Login exitoso", Toast.LENGTH_SHORT).show();
+                    String success = getString(R.string.loginSuccess);
+                    Toast.makeText(this, success, Toast.LENGTH_SHORT).show();
 
                     int userId = getUserId(email);
 

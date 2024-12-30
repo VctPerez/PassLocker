@@ -1,6 +1,7 @@
 package es.uma.passlocker;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
@@ -37,7 +38,13 @@ public class RegisterActivity extends AppCompatActivity {
             KeyStoreHelper.getKey();
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error al inicializar KeyStore", Toast.LENGTH_SHORT).show();
+            String okButton = getString(R.string.okButton);
+            String errorMesage = getString(R.string.keyStoreError);
+            new AlertDialog.Builder(this)
+                    .setTitle("Error")
+                    .setMessage(errorMesage)
+                    .setPositiveButton(okButton, (dialog, which) -> dialog.dismiss())
+                    .show();
             return;
         }
 
@@ -58,8 +65,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String hashedPassword = HashHelper.generateHash(encryptedPassword);
 
                 int userId = this.saveUser(email, hashedPassword);
-
-                Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
+                String success = getString(R.string.registerSuccess);
+                Toast.makeText(this, success, Toast.LENGTH_SHORT).show();
 
                 SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -71,7 +78,14 @@ public class RegisterActivity extends AppCompatActivity {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(this, "Error al procesar la contraseña", Toast.LENGTH_SHORT).show();
+                String okButton = getString(R.string.okButton);
+                String errorMesage = getString(R.string.passwordRegistration);
+                new AlertDialog.Builder(this)
+                        .setTitle("Error")
+                        .setMessage(errorMesage)
+                        .setPositiveButton(okButton, (dialog, which) -> dialog.dismiss())
+                        .show();
+                return;
             }
         });
     }
