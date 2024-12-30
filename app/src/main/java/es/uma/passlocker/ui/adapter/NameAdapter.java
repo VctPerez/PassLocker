@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import es.uma.passlocker.R;
+
 public class NameAdapter extends RecyclerView.Adapter<NameAdapter.NameViewHolder> {
 
     private final List<String> nameList;
@@ -29,7 +31,7 @@ public class NameAdapter extends RecyclerView.Adapter<NameAdapter.NameViewHolder
     @NonNull
     @Override
     public NameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.item_button, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_button, parent, false);
         return new NameViewHolder(view);
     }
 
@@ -49,7 +51,7 @@ public class NameAdapter extends RecyclerView.Adapter<NameAdapter.NameViewHolder
 
         public NameViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(android.R.id.text1);
+            tvName = itemView.findViewById(R.id.tvName);
         }
 
         public void bind(String name, OnItemClickListener onItemClickListener) {
