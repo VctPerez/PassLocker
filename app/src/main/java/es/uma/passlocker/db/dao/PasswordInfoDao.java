@@ -1,5 +1,6 @@
 package es.uma.passlocker.db.dao;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -20,45 +21,38 @@ public class PasswordInfoDao {
     }
 
     public void insertPasswordInfo(Integer userId, String siteName, String siteUrl, String notes, String password) {
-        String query = "INSERT INTO password_info (user_id, site_name, site_url, notes, password) VALUES (?, ?, ?, ?, ?)";
+        ContentValues values = new ContentValues();
+        values.put("user_id", userId);
+        values.put("site_name", siteName);
+        values.put("site_url", siteUrl);
+        values.put("notes", notes);
+        values.put("password", password);
         try {
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
-            SQLiteStatement statement = db.compileStatement(query);
-            statement.bindLong(1, userId);
-            statement.bindString(2, siteName);
-            statement.bindString(3, siteUrl);
-            statement.bindString(4, notes);
-            statement.bindString(5, password);
-            statement.executeInsert();
+            db.insert("password_info", null, values);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void deletePasswordInfo(Integer passwordId) {
-        String query = "DELETE FROM password_info WHERE id = ?";
         try {
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
-            SQLiteStatement statement = db.compileStatement(query);
-            statement.bindLong(1, passwordId);
-            statement.executeUpdateDelete();
+            db.delete("password_info", "id LIKE ?", new String[]{String.valueOf(passwordId)});
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void updatePasswordInfo(Integer id, String siteName, String siteUrl, String notes, String password) {
-        String query = "UPDATE password_info SET site_name = ?, site_url = ?, notes = ?, password = ? WHERE id = ?";
+        ContentValues values = new ContentValues();
+        values.put("site_name", siteName);
+        values.put("site_url", siteUrl);
+        values.put("notes", notes);
+        values.put("password", password);
         try {
             SQLiteDatabase db = databaseHelper.getWritableDatabase();
-            SQLiteStatement statement = db.compileStatement(query);
-            statement.bindString(1, siteName);
-            statement.bindString(2, siteUrl);
-            statement.bindString(3, notes);
-            statement.bindString(4, password);
-            statement.bindLong(5, id);
-
-            statement.executeUpdateDelete();
+            db.update("password_info", values, "id LIKE ?", new String[]{String.valueOf(id)});
         } catch (Exception e) {
             e.printStackTrace();
         }

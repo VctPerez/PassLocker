@@ -3,7 +3,10 @@ package es.uma.passlocker.db.dao;
 import es.uma.passlocker.db.DatabaseHelper;
 import es.uma.passlocker.db.entities.UserEntity;
 
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 
 import java.util.Arrays;
 
@@ -16,15 +19,35 @@ public class UserDao {
     }
 
     public void insertUser(String username, String password) {
-        databaseHelper.getWritableDatabase().execSQL("INSERT INTO user (username, password) VALUES ('" + username + "', '" + password + "')");
+        ContentValues values = new ContentValues();
+        values.put("username", username);
+        values.put("password", password);
+        try {
+            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+            db.insert("user", null, values);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteUser(String username) {
-        databaseHelper.getWritableDatabase().execSQL("DELETE FROM user WHERE username = '" + username + "'");
+        try {
+            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+            db.delete("user", "username LIKE ?", new String[]{username});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateUser(String oldUsername, String newUsername) {
-        databaseHelper.getWritableDatabase().execSQL("UPDATE user SET username = '" + newUsername + "' WHERE username = '" + oldUsername + "'");
+        ContentValues values = new ContentValues();
+        values.put("username", newUsername);
+        try {
+            SQLiteDatabase db = databaseHelper.getWritableDatabase();
+            db.update("user", values, "username LIKE ?", new String[]{oldUsername});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public UserEntity getUser(String username) {
