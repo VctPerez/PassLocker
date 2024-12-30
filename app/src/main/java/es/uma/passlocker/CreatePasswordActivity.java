@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -62,6 +63,11 @@ public class CreatePasswordActivity extends AppCompatActivity {
         ProgressBar passwordStrengthBar = findViewById(R.id.passwordStrengthBar);
 
         etPassword.setText(instancePassword);
+        if(!etPassword.getText().toString().isEmpty()){
+            int strength = PasswordUtils.checkStrength(etPassword.getText().toString());
+            passwordStrengthBar.setProgress(strength);
+            passwordStrengthBar.setProgressTintList(calculateColor(strength));
+        }
         etTitle.setText(instanceTitle);
         etUrl.setText(instanceUrl);
         etNotes.setText(instanceNotes);
@@ -83,15 +89,8 @@ public class CreatePasswordActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 int strength = PasswordUtils.checkStrength(s.toString());
                 passwordStrengthBar.setProgress(strength);
-                if(strength == 25) {
-                    passwordStrengthBar.setProgressTintList(ColorStateList.valueOf(Color.DKGRAY));
-                }else if (strength == 50) {
-                    passwordStrengthBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
-                }else if (strength == 75) {
-                    passwordStrengthBar.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
-                }else{
-                    passwordStrengthBar.setProgressTintList(ColorStateList.valueOf(Color.MAGENTA));
-                }
+
+                passwordStrengthBar.setProgressTintList(calculateColor(strength));
             }
         });
 
@@ -118,6 +117,7 @@ public class CreatePasswordActivity extends AppCompatActivity {
         buttonDelete.setOnClickListener(v -> {
             PasswordInfoDao pwInfoDao = PasswordInfoDao.getInstance();
             pwInfoDao.deletePasswordInfo(id);
+            Toast.makeText(this, getString(R.string.successDelete), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(CreatePasswordActivity.this, MenuActivity.class);
             startActivity(intent);
         });
@@ -126,6 +126,7 @@ public class CreatePasswordActivity extends AppCompatActivity {
         generateButton.setOnClickListener(v -> {
             try{
                 generatePassword();
+
             }catch (Exception e){
                 String okButton = getString(R.string.okButton);
                 String errorMesage = getString(R.string.generatePasswordException);
@@ -193,8 +194,7 @@ public class CreatePasswordActivity extends AppCompatActivity {
             pwInfoDao.updatePasswordInfo(id, title, url, notes, Base64.getEncoder().encodeToString(encryptedPassword));
         }
         String successMessage = getString(R.string.successSave);
-        Snackbar.make(findViewById(R.id.main_layout), successMessage, Snackbar.LENGTH_LONG).show();
-
+        Toast.makeText(this, successMessage, Toast.LENGTH_SHORT).show();
     }
 
     private void generatePassword() {
@@ -208,6 +208,20 @@ public class CreatePasswordActivity extends AppCompatActivity {
         etPassword.setText(password);
         String successMessage = getString(R.string.successGeneration);
         Snackbar.make(findViewById(R.id.main_layout), successMessage, Snackbar.LENGTH_LONG).show();
+    }
+
+    private ColorStateList calculateColor(int strength){
+        ColorStateList color;
+        if(strength == 25) {
+            color = ColorStateList.valueOf(Color.DKGRAY);
+        }else if (strength == 50) {
+            color = ColorStateList.valueOf(Color.RED);
+        }else if (strength == 75) {
+            color = ColorStateList.valueOf(Color.GREEN);
+        }else{
+            color = ColorStateList.valueOf(Color.MAGENTA);
+        }
+        return color;
     }
 
 }

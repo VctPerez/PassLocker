@@ -2,13 +2,13 @@
     <string name="auth_keys">Claves de Autenticación</string>
     <string name="passwords">Contraseñas</string>
     <string name="language">Idioma</string>
-    <string name="uppercaseOption">Mayusculas</string>
+    <string name="uppercaseOption">Mayúsculas</string>
     <string-array name="translation_options">
         <item>Spanish</item>
         <item>English</item>
     </string-array>
-    <string name="specialCharOption">Caracteres Especiales</string>
-    <string name="numbersOption">Numeros [0-9]</string>
+    <string name="specialCharOption">Caracteres especiales</string>
+    <string name="numbersOption">Números [0-9]</string>
     <string name="passwordOptions">Opciones para contraseña:</string>
     <string name="generateButton">Generar</string>
     <string name="titleInput">Título</string>
@@ -39,4 +39,6 @@
     <string name="registerSuccess">Registro exitoso</string>
     <string name="loginSuccess">Inicio de sesión exitoso</string>
     <string name="passwordStrengthLabel">Seguridad de la contraseña:</string>
+    <string name="successDelete">Contraseña eliminada correctamente</string>
+    <string name="passwordLabel">Contraseñas</string>
 </resources>

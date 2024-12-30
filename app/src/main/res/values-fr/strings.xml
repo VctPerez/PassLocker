@@ -1,0 +1,44 @@
+<resources>
+    <string name="auth_keys">Clés d\'authentification</string>
+    <string name="passwords">Mots de passe</string>
+    <string name="language">Langue</string>
+    <string name="uppercaseOption">Majuscules</string>
+    <string-array name="translation_options">
+        <item>Espagnol</item>
+        <item>Anglais</item>
+    </string-array>
+    <string name="specialCharOption">Caractères spéciaux</string>
+    <string name="numbersOption">Nombres [0-9]</string>
+    <string name="passwordOptions">Options de mot de passe :</string>
+    <string name="generateButton">Générer</string>
+    <string name="titleInput">Titre</string>
+    <string name="passswordInput">Mot de passe</string>
+    <string name="notesInput">Notes (Optionnel)</string>
+    <string name="urlInput">URL (Optionnel)</string>
+    <string name="saveButton">Enregistrer</string>
+    <string name="gotoCreateButton">Créer un mot de passe</string>
+    <string name="gotoListButton">Afficher les mots de passe</string>
+    <string name="show_password">Afficher</string>
+    <string name="signInException">Identifiants incorrects</string>
+    <string name="registerUserException">L\'utilisateur est déjà enregistré</string>
+    <string name="registerPasswordException">Les mots de passe ne correspondent pas</string>
+    <string name="okButton">OK</string>
+    <string name="registerButton">S\'inscrire</string>
+    <string name="confirmPasswordInput">Confirmer le mot de passe</string>
+    <string name="usernameInput">Nom d\'utilisateur</string>
+    <string name="loginButton">Se connecter</string>
+    <string name="emptyPasswordFields">Vous devez entrer un mot de passe et un titre</string>
+    <string name="successGeneration">Mot de passe généré avec succès</string>
+    <string name="successSave">Mot de passe enregistré avec succès</string>
+    <string name="hidePassword">Masquer</string>
+    <string name="lengthTag">Longueur :</string>
+    <string name="generatePasswordException">Longueur de mot de passe invalide</string>
+    <string name="deleteButton">Supprimer</string>
+    <string name="keyStoreError">Erreur lors du chargement du magasin de clés</string>
+    <string name="passwordRegistration">Erreur lors du traitement de votre mot de passe</string>
+    <string name="registerSuccess">Inscription réussie</string>
+    <string name="loginSuccess">Connexion réussie</string>
+    <string name="passwordStrengthLabel">Solidité du mot de passe :</string>
+    <string name="successDelete">Mot de passe supprimé avec succès</string>
+    <string name="passwordLabel">Mots de passe</string>
+</resources>

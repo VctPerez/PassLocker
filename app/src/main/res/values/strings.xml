@@ -40,4 +40,6 @@
     <string name="registerSuccess">Register Success</string>
     <string name="loginSuccess">Login Success</string>
     <string name="passwordStrengthLabel">Password strength:</string>
+    <string name="successDelete">Password deleted successfully</string>
+    <string name="passwordLabel">Passwords</string>
 </resources>
