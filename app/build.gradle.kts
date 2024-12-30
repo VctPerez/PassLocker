@@ -25,6 +25,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -32,6 +33,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+}
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
 dependencies {
@@ -44,7 +48,8 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.recyclerview)
-    testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
+//    testRuntimeOnly(libs.junit.platform.launcher)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }

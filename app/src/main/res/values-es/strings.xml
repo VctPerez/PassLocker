@@ -38,4 +38,5 @@
     <string name="passwordRegistration">Error al procesar la contraseña</string>
     <string name="registerSuccess">Registro exitoso</string>
     <string name="loginSuccess">Inicio de sesión exitoso</string>
+    <string name="passwordStrengthLabel">Seguridad de la contraseña:</string>
 </resources>

@@ -11,8 +11,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PassLocker"
-        tools:targetApi="31" >
+        android:theme="@style/Theme.PassLocker">
         <activity
             android:name=".MenuActivity"
             android:exported="false"
